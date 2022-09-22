@@ -5,11 +5,11 @@
 
 const { Router } = require('express')
 const { check } = require('express-validator')
-const router = Router()
-
 const { createUser, login, revalidateToken } = require('../controllers/auth')
 const { validateFields } = require('../middlewares/validate-fields')
 const { validateJWT } = require('../middlewares/validate-jwt')
+
+const router = Router()
 
 router.post('/new',
   [// middlewares

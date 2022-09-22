@@ -2,8 +2,8 @@ const { response } = require('express')
 const jwt = require('jsonwebtoken')
 
 const validateJWT = (req, res = response, next) => {
-  //x-token headers
 
+  //x-token headers
   const token = req.header('x-token')
 
   if (!token) {
@@ -28,8 +28,6 @@ const validateJWT = (req, res = response, next) => {
 
 
   }
-
-  console.log(token);
 
   next()
 }

@@ -1,21 +1,13 @@
 const { response } = require('express')
-const { validationResult } = require('express-validator')
+const { generateJWT } = require('../helpers/jwt')
 const bcrypt = require('bcryptjs')
 const User = require('../models/user-schema')
-const { generateJWT } = require('../helpers/jwt')
 
 
 const createUser = async (req, res = response) => { // <== The response help with the intellisense
   const { email, password } = req.body
 
   try {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        ok: false,
-        errors: errors.mapped()
-      })
-    }
 
     //Verify if the email exists
     let user = await User.findOne({ email })
@@ -61,14 +53,6 @@ const login = async (req, res = response) => {
   const { email, password } = req.body
 
   try {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        ok: false,
-        errors: errors.mapped()
-      })
-    }
 
     //Verify if the email exists
     let user = await User.findOne({ email })
