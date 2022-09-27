@@ -71,6 +71,7 @@ const updateEvent = async (req, res = response) => {
       ok: false,
       message: 'You do not have permission to edit this event'
     })
+    return;
   }
 
   const updatedEvent = {
@@ -78,9 +79,8 @@ const updateEvent = async (req, res = response) => {
     user: req.uid
   }
 
-  const rta = await Event.findByIdAndUpdate(eventId, updatedEvent, { new: true }) // The new: true option returns the updated event
-
   try {
+    const rta = await Event.findByIdAndUpdate(eventId, updatedEvent, { new: true }) // The new: true option returns the updated event
 
     res.status(200).json({
       ok: true,
