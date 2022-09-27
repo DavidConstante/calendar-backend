@@ -25,12 +25,11 @@ app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 
-//TODO: CRUD
+//Manage all the other routes (direct routes)
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'public/index.html'))
 
-
-
-
-
+})
 
 // Listen petitions
 app.listen(PORT, () => {
